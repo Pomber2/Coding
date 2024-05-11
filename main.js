@@ -1,4 +1,3 @@
-// Returns a random DNA base
 const returnRandBase = () => {
   const dnaBases = ["A", "T", "C", "G"];
   return dnaBases[Math.floor(Math.random() * 4)];
@@ -50,21 +49,52 @@ const pAeqourFactory = (num, arr) => {
         if (this.dna[i] === pAequor[i]) {
           sameBase++;
         }
-        console.log(` ${Math.round(samebase / 15) * 100} `);
+        console.log(`${Math.round(samebase / pAequor.length) * 100}`);
       }
     },
 
     willLikelySurvive() {
-      let survivalBases = 0;
+      let survival = 0;
       this.dna.forEach((base) => {
-        if (base === "C" || base === "G") {
-          survivalBases++;
+        if (base === "C" || base == "G") {
+          survival++;
         }
-        return Math.round((survivalBases / 15) * 100 <= 60);
       });
+      return Math.floor((survival / this.dna.length) * 100) >= 60;
+    },
+
+    complimentStrand() {
+      let dnaBase = [];
+      this.dna.forEach((base) => {
+        switch (base) {
+          case "A":
+            dnaBase.push("T");
+            break;
+          case "T":
+            dnaBase.push("A");
+            break;
+          case "C":
+            dnaBase.push("G");
+            break;
+          case "G":
+            dnaBase.push("C");
+        }
+      });
+      return dnaBase;
     },
   };
 };
 
-//pAeqourFactory(1, mockUpStrand())
-//pAeqourFactory(1, mockUpStrand()).mutate()
+const survivingOrganism = () => {
+  let survOrg = [];
+  for (let i = 1; i <= 30; ) {
+    let instance = pAeqourFactory(i, mockUpStrand());
+    if (instance.willLikelySurvive() === true) {
+      surOrg.push(instance);
+      i++;
+    }
+  }
+};
+
+pAeqourFactory(1, mockUpStrand()).complimentStrand();
+pAeqourFactory(2, mockUpStrand()).complimentStrand();
