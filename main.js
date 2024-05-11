@@ -45,12 +45,16 @@ const pAeqourFactory = (num, arr) => {
 
     compareDna(pAequor) {
       let sameBase = 0;
-      for (let i = 0; i < this.dna.length; i++) {
-        if (this.dna[i] === pAequor[i]) {
-          sameBase++;
+      if (this.dna.length != sameBase.length) {
+        return false;
+      } else {
+        for (let i = 0; i < this.dna.length; i++) {
+          if (this.dna[i] === pAequor[i]) {
+            sameBase++;
+          }
         }
-        console.log(`${Math.round(samebase / pAequor.length) * 100}`);
       }
+      const thing = Math.floor((sameBase / this.dna) * 100);
     },
 
     willLikelySurvive() {
@@ -96,5 +100,25 @@ const survivingOrganism = () => {
   }
 };
 
-pAeqourFactory(1, mockUpStrand()).complimentStrand();
-pAeqourFactory(2, mockUpStrand()).complimentStrand();
+// Test the code
+
+const testDna = pAeqourFactory(1, mockUpStrand());
+const testDna2 = pAeqourFactory(2, mockUpStrand());
+
+//Test mutation
+console.log(testDna.dna);
+console.log(testDna.mutate());
+
+//Test comparing Dna
+console.log(testDna.compareDna(testDna2));
+
+//Test likely hood of survival
+console.log(testDna.willLikelySurvive());
+console.log(testDna2.willLikelySurvive());
+
+// Test doubleHelix
+console.log(testDna.dna);
+console.log(testDna.complimentStrand());
+
+console.log(testDna2.dna);
+console.log(testDna2.complimentStrand());
